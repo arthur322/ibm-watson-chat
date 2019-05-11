@@ -1,14 +1,17 @@
+require("dotenv").config();
 const express = require("express");
 const AssistantV1 = require("ibm-watson/assistant/v1");
 const bodyParser = require("body-parser");
+
+const config = require("config.js");
 
 const app = express();
 
 // Futuramente separar em arquivos de configuração
 const assistant = new AssistantV1({
-  version: "{version}",
-  iam_apikey: "{api key do assistente}",
-  url: "{url do assistente}"
+  version: config.version,
+  iam_apikey: config.iam_apikey,
+  url: config.url
 });
 
 app.use(bodyParser.json());
@@ -16,7 +19,10 @@ app.use(bodyParser.json());
 // Liberei corsão mesmo... Sem tempo irmão
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
   next();
 });
 
@@ -29,7 +35,7 @@ app.get("/", (req, res) => {
 app.post("/message", (req, resp) => {
   assistant
     .message({
-      workspace_id: "{id do workspace onde o assitente fica}",
+      workspace_id: config.workspace_id,
       input: { text: req.body.text },
       context: req.body.context
     })
@@ -41,4 +47,4 @@ app.post("/message", (req, resp) => {
     });
 });
 
-app.listen(3000);
+app.listen(3001);
