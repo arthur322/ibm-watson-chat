@@ -20,7 +20,7 @@ function App() {
 
     if (lastMessage.from === 'user') {
       axios
-        .post('{URL PRO BACK_END}', {
+        .post(`${process.env.BACKEND_SERVER_URL}/message`, {
           text: actualMessage,
           context
         })
