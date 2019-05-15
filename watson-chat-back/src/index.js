@@ -3,7 +3,7 @@ const express = require("express");
 const AssistantV1 = require("ibm-watson/assistant/v1");
 const bodyParser = require("body-parser");
 
-const config = require("config.js");
+const config = require("./config.js");
 
 const app = express();
 
