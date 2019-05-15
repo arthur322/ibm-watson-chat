@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
+
 import './styles.css'
 
 import Balaos from './components/Balao'
@@ -20,7 +21,7 @@ function App() {
 
     if (lastMessage.from === 'user') {
       axios
-        .post(`${process.env.BACKEND_SERVER_URL}/message`, {
+        .post(`${process.env.REACT_APP_BACKEND_SERVER_URL}/message`, {
           text: actualMessage,
           context
         })
